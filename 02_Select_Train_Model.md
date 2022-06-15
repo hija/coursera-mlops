@@ -74,4 +74,39 @@ Other things to consider:
 * How easy is to improve accuracy in that category.
 * How important it is to improve in that category.
 
-(To be continued)
+## Skewed Dataset
+* Look at Recall, F1, Precision
+
+## Performance auditing
+**Check for accuracy, fairness and bias.**
+
+1. Brainstorm the ways the system might go wrong.
+Look at the performance e.g. on different genders or rare classes
+3. Establish metrics to assess performance against these issues on appropriate slices of data.
+4. Get business/product owner buy-in.
+
+## Grouping tags
+Imagine there is an image classification task and the model performs good, but is bad with fruits. Chances are that focusing on improving one item in the group of fruits improves the overall performance of the fruit group. 
+
+## Data Augmentation
+**Create realistic examples that (i) the algorithm does poorly on, but (ii) humans (or other baseline) do well on**
+
+## Adding data
+* For unstructured data (images, voice, ...) adding data rarely hurts
+* For structured data you can add new features in order to improve the performance, e.g. if there is a recommender system for restaurants which recommends restaurants with only meat-meals to vegetarians, it can be fruitful to add the feature "vegetarian" to the person's feature set and "percent-of-meatmeals" to the restaurant's dataset. Adding data only would probably not increase the performance.
+
+## Experiment Tracking
+**What to track?** Data, Code, Hyperparameters, Results
+**How to track?** Textfile, Spreadsheet or experiment tracking system (start easy and improve if needed)
+**Desired features** In depth analysis of results, resource monitoring, visualization etc.
+
+--> Examples: MLFlow, DVC Studio, TensorBoard
+
+## From Big Data to good data
+Try to ensure consistently high-quality data in all phases of the ML project lifecycle.
+
+Good data is:
+* Cover of important cases (good coverage of inputs x)
+* Defined consistently (definition of labels y is unambiguous)
+* Has timely feedback from production data (distribution covers data drift and concept drift)
+* Sized appropriately
