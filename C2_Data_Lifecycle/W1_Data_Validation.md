@@ -85,4 +85,15 @@ Example Tools: Logstash, Fluentd
 --> Good overview: https://towardsdatascience.com/understanding-dataset-shift-f2a5a262a766
 
 
+## Skew Detection Workflow, e.g. in Tensorflow Extended
 
+Idea: We calculate on the training data baseline stats (min, max, std, ...) and a schema (what is the datatype of a specific column?). Then we check the serving data against the generated schema and baseline stats. If anomalies are detected, an alert is raised! We can thereby detect Schema Skew, Feature Skew and Distribution Skew.
+
+Detection from a coding point of view (https://www.tensorflow.org/tfx/data_validation/get_started):
+
+1.  stats = tfdv.generate_statistics_from_dataframe(df: pd.DataFrame)
+2.  (Visualisieren: tfdv.visualize_statistics(stats))
+3.  Derive schema: schema = tfdv.infer_schema(stats)
+4.  Check new data against it:
+    1.  serving_stats = tfdv.generate_statistics_from_dataframe(df: pd.DataFrame)
+    2.  serving_anomalies = tfdv.validate_statistics(serving_stats, schema)
